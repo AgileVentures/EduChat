@@ -17,8 +17,10 @@ chatframeContent =
  '<style>.no-close .ui-dialog-titlebar-close { display: none; }</style>'
 ].join('\n');
 
-$("#chatframe").hide();
-$("#chatframe").html(chatframeContent);
+$("#chatframe").on("click", function() {
+  $("#chatframe").hide();
+  $("#chatframe").html(chatframeContent);
+});
 
 function getContentInContainer(matchClass) {
     var elems = document.getElementsByTagName('*'), i;
