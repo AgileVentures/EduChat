@@ -18,8 +18,8 @@ chatframeContent =
 ].join('\n');
 
 $("#chatframe").on("click", function() {
-  $("#chatframe").hide();
-  $("#chatframe").html(chatframeContent);
+  this.hide();
+  this.html(chatframeContent);
 });
 
 function getContentInContainer(matchClass) {
