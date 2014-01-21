@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #fff;
+  color: #666;
+}
+
+section.chat {
+  padding: 2px;
+}
+
+span.timestamp {
+  color: #aaa;
+}
+
+p {
+  margin: 3px 0;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a.name {
+  font-weight: bold;
+}
+
+a.tag-name {
+  color: #000;
+/*  font-weight: bold;*/
+}
+
+a.external {
+  color: #009fe6;
+}
+
