@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+div#chatframe {
+  height: 300px;
+  width: 900px;
+  padding: 15px 5px 5px 5px;
+  background: #888;
+  position: fixed;
+  bottom: 0;
+  right: 5%;
+  text-align: center;
+  border-radius: 15px 15px 0 0;
+  -webkit-transition: width 0.2s ease, height 0.2s ease;  
+  -moz-transition: width 0.2s ease, height 0.2s ease;  
+  -o-transition: width 0.2s ease, height 0.2s ease;  
+  transition: width 0.2s ease, height 0.2s ease;  
+}
+
+div#chatframe.minimized {
+  height: 30px;
+  width: 80px;
+}
+

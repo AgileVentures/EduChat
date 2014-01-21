@@ -9,7 +9,7 @@ $(function(e) {
       ['<p><span id="loadingchat">Loading chat...</span>',
        '<iframe id="chatiframe"',
        '       style="position: absolute; top: -9999em; visibility: hidden;"',
-       '       onload="showDelayed(5,this,\'loadingchat\');"',
+//       '       onload="showDelayed(5,this,\'loadingchat\');"',
        '       src="javascript:void(0)"',
        '       height="300" width="100%"></iframe></p>',
        '<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />',
@@ -18,6 +18,9 @@ $(function(e) {
 
       chatBtn.hide();
       chatBtn.html(chatframeContent);
+      $('iframe#chatiframe').on('load', function() {
+        showDelayed(5, this, 'loadingchat');
+      });
 
       init();
     });
@@ -42,12 +45,11 @@ $(function(e) {
   }
 
   function getUsername() {
-    return 'testdummy101';
-  //  var n = getContentInContainer("user-link").replace("Dashboard for:", "").replace(/^\s+|\s+$/g, '');
-  //  if (!isNaN(n[0])) {
-  //     n = "_" + n;
-  //  }
-  //  return n;
+    var name = getContentInContainer("user-link").replace("Dashboard for:", "").replace(/^\s+|\s+$/g, '');
+    if (!isNaN(name[0])) {
+       name = "_" + name;
+    }
+    return name;
   }
 
   function updateChatUrl() {
@@ -110,13 +112,13 @@ $(function(e) {
         updateReviewMessage();
     }, 30 * 1000);
   }
+  
+  function showDelayed(delaySeconds, element, elementHide) {
+    setTimeout(function(){
+      element.style.position='static';
+      element.style.visibility='visible';
+      document.getElementById(elementHide).style.display='none';
+      $("#chatframe").removeClass('minimized');
+    }, 1000*delaySeconds);
+  }
 }));
-
-// Bryan: Should be accessible from the DOM
-function showDelayed(delaySeconds, element, elementHide) {
-  setTimeout(function(){
-    element.style.position='static';
-    element.style.visibility='visible';
-    document.getElementById(elementHide).style.display='none';
-  }, 1000*delaySeconds);
-}
