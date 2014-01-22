@@ -120,13 +120,13 @@ $(function(e) {
       element.style.visibility='visible';
       //document.getElementById(elementHide).style.display='none';
       $("#chatframe").removeClass('minimized');
-      $("#chat_button").html("Close");
+      $("#chat_button").html("Close Chat");
       $('#chat_button').on("click", function() {
        $('#chatframe').toggleClass("minimized");
 	   if ($('#chatframe').hasClass("minimized")) {
-			$("#chat_button").html("Open");
+			$("#chat_button").html("Open Chat");
 	   } else {
-		    $("#chat_button").html("Close");
+		    $("#chat_button").html("Close Chat");
 	   }
     })}, 1000*delaySeconds);
   }
