@@ -124,7 +124,7 @@ $(function(e) {
       $('#chat_button').on("click", function() {
        $('#chatframe').toggleClass("minimized");
 	   if ($('#chatframe').hasClass("minimized")) {
-			$("#chat_button").html("Load");
+			$("#chat_button").html("Open");
 	   } else {
 		    $("#chat_button").html("Close");
 	   }
