@@ -31,10 +31,15 @@ div#chatframe.minimized {
 }
 
 iframe#chatiframe {
-  width: 600px;
-  height: 185px;
+  width: 800px;
+  height: 285px;
   -webkit-transition: width 0.2s ease, height 0.2s ease;  
   -moz-transition: width 0.2s ease, height 0.2s ease;  
   -o-transition: width 0.2s ease, height 0.2s ease;  
   transition: width 0.2s ease, height 0.2s ease;  
+}
+
+#chat_button{
+  color: black;
+  font-weight:900;
 }
