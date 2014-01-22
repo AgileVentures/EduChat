@@ -24,3 +24,17 @@ div#chatframe.minimized {
   width: 80px;
 }
 
+
+.minimized iframe#chatiframe {
+  height: 0px;
+  width: 0px;
+}
+
+iframe#chatiframe {
+  width: 600px;
+  height: 185px;
+  -webkit-transition: width 0.2s ease, height 0.2s ease;  
+  -moz-transition: width 0.2s ease, height 0.2s ease;  
+  -o-transition: width 0.2s ease, height 0.2s ease;  
+  transition: width 0.2s ease, height 0.2s ease;  
+}

@@ -3,8 +3,9 @@ $(function(e) {
 }(function($, window, document) {
   
   $(function() {
-    var chatBtn = $("#chatframe");
-    chatBtn.on("click", function() {
+    var chatBtn = $("#chat_button");
+    chatBtn.one("click", function() {
+	  chatBtn.html("Loading");
       chatframeContent =
       ['<p><span id="loadingchat">Loading chat...</span>',
        '<iframe id="chatiframe"',
@@ -16,8 +17,8 @@ $(function(e) {
        '<style>.no-close .ui-dialog-titlebar-close { display: none; }</style>'
       ].join('\n');
 
-      chatBtn.hide();
-      chatBtn.html(chatframeContent);
+      //chatBtn.hide();
+      //chatBtn.html(chatframeContent);
       $('iframe#chatiframe').on('load', function() {
         showDelayed(5, this, 'loadingchat');
       });
@@ -117,8 +118,17 @@ $(function(e) {
     setTimeout(function(){
       element.style.position='static';
       element.style.visibility='visible';
-      document.getElementById(elementHide).style.display='none';
+      //document.getElementById(elementHide).style.display='none';
       $("#chatframe").removeClass('minimized');
-    }, 1000*delaySeconds);
+      $("#chat_button").html("Close");
+      $('#chat_button').on("click", function() {
+       $('#chatframe').toggleClass("minimized");
+	   if ($('#chatframe').hasClass("minimized")) {
+			$("#chat_button").html("Load");
+	   } else {
+		    $("#chat_button").html("Close");
+	   }
+    })}, 1000*delaySeconds);
   }
 }));
+
