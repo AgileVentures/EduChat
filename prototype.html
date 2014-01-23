@@ -4,12 +4,13 @@
   <meta charset="utf-8" />
   <title>EduChat Prototype</title>
   <script type="text/javascript" src="app/assets/javascripts/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="app/chatframe_popupWin.js"></script>
 </head>
 
 <body>
   <div class="user-link">Dashboard for: testdummy101</div>
   <link rel="stylesheet" href="app/assets/app.css">
-  <script type="text/javascript" src="app/edxframe_toggleBtn.js"></script>
+  <script type="text/javascript" src="app/chatframe_toggleBtn.js"></script>
 
 
 <div id="chatframe" class="minimized">  
@@ -17,6 +18,14 @@
     <iframe src="javascript:void(0)" id="chatiframe"></iframe>
 </div>
 
+<br>
+<span>
+<p><button class="chatframe">Open Chat Window</button></p> 
+<script type="text/javascript"> 
+ 	$('.chatframe').popupWindow();
+</script>
+</span>
 </body>
 
-</head>
+</html>
+	
