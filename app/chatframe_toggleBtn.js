@@ -1,38 +1,36 @@
 $(function() {
-    $(function () {
-        var chatBtn = $("#chat_button");
-        // chatBtn.one("click", function () {
-        function initChat() {
-            chatBtn.html("Loading");
-            chatframeContent =
-                ['<p><span id="loadingchat">Loading chat...</span>',
-                    '<iframe id="chatiframe"',
-                    '       style="position: absolute; top: -9999em; visibility: hidden;"',
+    var chatBtn = $("#chat_button");
+    // chatBtn.one("click", function () {
+    function initChat() {
+        chatBtn.html("Loading");
+        chatframeContent =
+            ['<p><span id="loadingchat">Loading chat...</span>',
+                '<iframe id="chatiframe"',
+                '       style="position: absolute; top: -9999em; visibility: hidden;"',
 //       '       onload="showDelayed(5,this,\'loadingchat\');"',
-                '       src="javascript:void(0)"',
-                '       height="300" width="100%"></iframe></p>',
-                '<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />',
-                '<style>.no-close .ui-dialog-titlebar-close { display: none; }</style>'
-            ].join('\n');
+            '       src="javascript:void(0)"',
+            '       height="300" width="100%"></iframe></p>',
+            '<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />',
+            '<style>.no-close .ui-dialog-titlebar-close { display: none; }</style>'
+        ].join('\n');
 
-            //chatBtn.hide();
-            //chatBtn.html(chatframeContent);
-            $('iframe#chatiframe').on('load', function () {
-                showDelayed(5, this, 'loadingchat');
-            });
+        //chatBtn.hide();
+        //chatBtn.html(chatframeContent);
+        $('iframe#chatiframe').on('load', function () {
+            showDelayed(5, this, 'loadingchat');
+        });
 
-            init();
-        }
+        init();
+    }
 
-        if (document.cookie === "chat_default=close; expires=Thu, 18 Dec 2014 12:00:00 GMT") {
-          chatBtn.one("click", function() {
-            initChat();
-          });
-        } else {
-          initChat();
-        }
-        // });
-    });
+    if ($.cookie('chat_default') === "closed") {
+      chatBtn.one("click", function() {
+        initChat();
+      });
+    } else {
+      initChat();
+    }
+    // });
 
     var chatChannels = "#cs1692x";
     var urlPrefix = 'https://cs1692x.moocforums.org/chatlog/edxframe/CS169.2x/3T2013/';
@@ -130,13 +128,11 @@ $(function() {
             $('#chat_button').on("click", function () {
                 $('#chatframe').toggleClass("minimized");
                 if ($('#chatframe').hasClass("minimized")) {
-                    document.cookie = "chatdefault=closed; path=/";
+                    $.cookie('chat_default', 'closed', { expires: 7 });
                     $("#chat_button").html("Open Chat");
-                    alert(document.cookie);
                 } else {
-                    document.cookie = "chatdefault=open; path=/";
+                    $.cookie('chat_default', 'open', { expires: 7 });
                     $("#chat_button").html("Close Chat");
-                    alert(document.cookie);
                 }
             })
         }, 1000 * delaySeconds);
