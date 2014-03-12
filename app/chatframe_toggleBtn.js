@@ -1,10 +1,8 @@
-$(function (e) {
-    e(window.jQuery, window, document);
-}(function ($, window, document) {
-
+$(function() {
     $(function () {
         var chatBtn = $("#chat_button");
-        chatBtn.one("click", function () {
+        // chatBtn.one("click", function () {
+        function initChat() {
             chatBtn.html("Loading");
             chatframeContent =
                 ['<p><span id="loadingchat">Loading chat...</span>',
@@ -24,7 +22,16 @@ $(function (e) {
             });
 
             init();
-        });
+        }
+
+        if (document.cookie === "chat_default=close; expires=Thu, 18 Dec 2014 12:00:00 GMT") {
+          chatBtn.one("click", function() {
+            initChat();
+          });
+        } else {
+          initChat();
+        }
+        // });
     });
 
     var chatChannels = "#cs1692x";
@@ -123,12 +130,16 @@ $(function (e) {
             $('#chat_button').on("click", function () {
                 $('#chatframe').toggleClass("minimized");
                 if ($('#chatframe').hasClass("minimized")) {
+                    document.cookie = "chatdefault=closed; path=/";
                     $("#chat_button").html("Open Chat");
+                    alert(document.cookie);
                 } else {
+                    document.cookie = "chatdefault=open; path=/";
                     $("#chat_button").html("Close Chat");
+                    alert(document.cookie);
                 }
             })
         }, 1000 * delaySeconds);
     }
-}));
+});
 
