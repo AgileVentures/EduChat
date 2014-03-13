@@ -14,7 +14,7 @@ div#chatframe {
   -moz-transition: width 0.2s ease, height 0.2s ease;  
   -o-transition: width 0.2s ease, height 0.2s ease;  
   transition: width 0.2s ease, height 0.2s ease;  
-  z-index: 10;
+  z-index: 100;
 }
 
 div#chatframe.minimized {
@@ -29,7 +29,7 @@ div#chatframe.minimized {
   font-weight:900;
   padding: 5px;
   margin: 0;
-  z-index: 10;
+  z-index: 100;
 }
 
 .minimized iframe#chatiframe {
@@ -46,6 +46,6 @@ iframe#chatiframe {
   -moz-transition: width 0.2s ease, height 0.2s ease;  
   -o-transition: width 0.2s ease, height 0.2s ease;  
   transition: width 0.2s ease, height 0.2s ease;  
-  z-index: 10;
+  z-index: 100;
 }
 
