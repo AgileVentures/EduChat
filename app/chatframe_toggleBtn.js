@@ -33,7 +33,7 @@ $(function() {
         }
         // });
 
-        var chatChannels = "#" + $('#chatframe').data('chat-channel');
+        var chatChannels = "#cs1692x";
         var urlPrefix = 'https://cs1692x.moocforums.org/chatlog/edxframe/CS169.2x/3T2013/';
 
         var onChatTab = false;
