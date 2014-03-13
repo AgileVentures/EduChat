@@ -27,7 +27,6 @@ $(function() {
         if ($.cookie('chat_default') === "closed" || window.outerWidth < 750) {
           chatBtn.one("click", function() {
             initChat();
-            $.cookie('chat_default', 'open', { expires: 7 });
           });
         } else {
           initChat();
@@ -126,7 +125,8 @@ $(function() {
                 element.style.visibility = 'visible';
                 //document.getElementById(elementHide).style.display='none';
                 $("#chatframe").removeClass('minimized');
-                $("#chat-button").html("Close Chat");
+                $("#chat-button").html("Hide Chat");
+                $.cookie('chat_default', 'open', { expires: 7 });
                 $('#chat-button').on("click", function () {
                     $('#chatframe').toggleClass("minimized");
                     if ($('#chatframe').hasClass("minimized")) {
@@ -134,7 +134,7 @@ $(function() {
                         $("#chat-button").html("Open Chat");
                     } else {
                         $.cookie('chat_default', 'open', { expires: 7 });
-                        $("#chat-button").html("Close Chat");
+                        $("#chat-button").html("Hide Chat");
                     }
                 })
             }, 1000 * delaySeconds);
