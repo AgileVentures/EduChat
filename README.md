@@ -12,3 +12,5 @@ To embed the improved chat server to an edX course, copy and paste the following
   <iframe src="javascript:void(0)" id="chatiframe"></iframe>
 </div>
 ~~~
+
+**WARNING**: Embedding this element causes conflicts with the editor, and will be difficult to edit/remove once added. It is recommended to keep a backup of the page somewhere when adding this element.
