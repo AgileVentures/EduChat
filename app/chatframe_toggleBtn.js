@@ -20,6 +20,20 @@ $("#chatiframe").on('load', function() {
 	showDelayed(5, this, 'loadingchat');
 });
 
+if ($.cookie('chat_default') === "closed" || window.outerWidth < 750) {
+	window.onload = function() {
+          $("#chat-button").one("click", function() {
+            init();
+          });
+	}
+} else {
+	if (document.getElementById('chatiframe')) {
+	  init();
+	} else {
+	  window.onload = init;
+	}
+}
+
 function getContentInContainer(matchClass) {
     var elems = document.getElementsByTagName('*'), i;
     for (i in elems) {
@@ -46,12 +60,6 @@ function updateChatUrl() {
       '&nick=' + encodeURI(username);
 }
 
-if (document.getElementById('chatiframe')) {
-  init();
-} else {
-  window.onload = init;
-}
-
 function updateReviewMessage() {
   // Based on http://www.jquery4u.com/json/jsonp-examples/
   $.ajax({
@@ -71,13 +79,14 @@ function updateReviewMessage() {
 	  {
 	      $("#reviewstarting").show();
 	  } else {
-	      $("#reviewstarting").hide();
+	      $("#reviewstartingl").hide();
 	  }
       }
   });
 }
 
 function init() {
+	$("#chat-button").html("Loading");
   updateChatUrl();
 
   if (onChatTab) {
