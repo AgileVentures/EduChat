@@ -19,17 +19,21 @@ div#chatframe {
 
 div#chatframe.minimized {
   height: 30px;
-  width: 100px;
+  width: 130px;
 }
 
 #chat-button {
   display: block;
-  text-align: center;
+  text-align: right;
   color: #333;
   font-weight:900;
   padding: 5px;
   margin: 0;
   z-index: 100;
+}
+
+.minimized #chat-button {
+  text-align: center;
 }
 
 .minimized iframe#chatiframe {
