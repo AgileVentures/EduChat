@@ -15,6 +15,7 @@ chatframeContent =
  '<style>.no-close .ui-dialog-titlebar-close { display: none; }</style>'
 ].join('\n');
 
+$("#chatframe").hide();
 $("#chatframe").html(chatframeContent);
 $("#chatiframe").on('load', function() {
 	showDelayed(5, this, 'loadingchat');
