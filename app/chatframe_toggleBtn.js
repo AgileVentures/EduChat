@@ -79,13 +79,14 @@ function updateReviewMessage() {
 	  {
 	      $("#reviewstarting").show();
 	  } else {
-	      $("#reviewstarting").hide();
+	      $("#reviewstartingl").hide();
 	  }
       }
   });
 }
 
 function init() {
+	$("#chat-button").html("Loading");
   updateChatUrl();
 
   if (onChatTab) {
