@@ -86,7 +86,7 @@ function updateReviewMessage() {
 }
 
 function init() {
-	$("#chat-button").html("Loading");
+	$("#chat-button").html("Loading ...");
   updateChatUrl();
 
   if (onChatTab) {
