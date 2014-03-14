@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+div#main_wrapper {
+  height: auto;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+p {
+  margin: 10px 0;
+  font-size: 150%;
+}
+
+div#chat {
+  position: fixed;
+  width: auto;
+  height: auto;
+  bottom: 0;
+  right: 5%;
+  background: #adadad;
+  border-radius: 10px 10px 0 0;
+  padding: 5px 10px 5px 10px;
+}
+
+div#chat nav ul {
+  padding: 2px 0;
+}
+
+div#chat nav li {
+  display: inline;
+}
+
+div#chat a {
+  color: #fff;
+  padding: 0 5px;
+}
+
+div#chat a#chat_button {
+  height: auto;
+  float: right;
+  display: block;
+}
+
+div#chat.minimized nav a {
+  height: 0;
+  display: none;
+}
+
+div#chat.minimized {
+  width: 40px;
+  height: 18px;
+}
+
+div#chat {
+  width: 700px;
+  height: 200px;
+  -webkit-transition: width 0.2s ease, height 0.2s ease;  
+  -moz-transition: width 0.2s ease, height 0.2s ease;  
+  -o-transition: width 0.2s ease, height 0.2s ease;  
+  transition: width 0.2s ease, height 0.2s ease;  
+}
+
+.minimized iframe#chat_window {
+  height: 0px;
+  width: 0px;
+}
+
+iframe#chat_window {
+  width: 600px;
+  height: 185px;
+  -webkit-transition: width 0.2s ease, height 0.2s ease;  
+  -moz-transition: width 0.2s ease, height 0.2s ease;  
+  -o-transition: width 0.2s ease, height 0.2s ease;  
+  transition: width 0.2s ease, height 0.2s ease;  
+}
+
+section#chat p {
+  color: #fff;
+}
+
