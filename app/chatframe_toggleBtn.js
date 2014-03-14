@@ -15,11 +15,16 @@ chatframeContent =
  '<style>.no-close .ui-dialog-titlebar-close { display: none; }</style>'
 ].join('\n');
 
-$("#chatframe").hide();
 $("#chatframe").html(chatframeContent);
 $("#chatiframe").on('load', function() {
 	showDelayed(5, this, 'loadingchat');
 });
+
+if (document.getElementById('chatiframe')) {
+  init();
+} else {
+  window.onload = init;
+}
 
 function getContentInContainer(matchClass) {
     var elems = document.getElementsByTagName('*'), i;
@@ -45,12 +50,6 @@ function updateChatUrl() {
       'https://cs1692x.moocforums.org:9001/' +
       '?channels=' + encodeURIComponent(chatChannels) +
       '&nick=' + encodeURI(username);
-}
-
-if (document.getElementById('chatiframe')) {
-  init();
-} else {
-  window.onload = init;
 }
 
 function updateReviewMessage() {
