@@ -20,10 +20,18 @@ $("#chatiframe").on('load', function() {
 	showDelayed(5, this, 'loadingchat');
 });
 
-if (document.getElementById('chatiframe')) {
-  init();
+if ($.cookie('chat_default') === "closed" || window.outerWidth < 750) {
+	window.onload = function() {
+          $("#chat-button").one("click", function() {
+            init();
+          });
+	}
 } else {
-  window.onload = init;
+	if (document.getElementById('chatiframe')) {
+	  init();
+	} else {
+	  window.onload = init;
+	}
 }
 
 function getContentInContainer(matchClass) {
