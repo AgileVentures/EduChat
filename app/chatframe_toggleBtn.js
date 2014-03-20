@@ -1,18 +1,7 @@
 (function() {
 
 var tmp = {};
-(function (factory) {
-	if (typeof define === 'function' && define.amd) {
-		// AMD
-		define(['jquery'], factory);
-	} else if (typeof exports === 'object') {
-		// CommonJS
-		factory(require('jquery'));
-	} else {
-		// Browser globals
-		factory(jQuery);
-	}
-}(function ($) {
+(function ($) {
 
 	var pluses = /\+/g;
 
@@ -101,16 +90,16 @@ var tmp = {};
 	config.defaults = {};
 
 	tmp.removeCookie = function (key, options) {
-		if ($.cookie(key) === undefined) {
+		if (tmp.cookie(key) === undefined) {
 			return false;
 		}
 
 		// Must not alter options, thus extending a fresh object...
-		$.cookie(key, '', $.extend({}, options, { expires: -1 }));
-		return !$.cookie(key);
+		tmp.cookie(key, '', $.extend({}, options, { expires: -1 }));
+		return !tmp.cookie(key);
 	};
 
-}));
+})(jQuery);
 
 var pathname = window.location.pathname;
 var chatChannels = "#"+pathname.split('/')[3];
