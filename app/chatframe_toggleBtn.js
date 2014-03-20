@@ -1,3 +1,4 @@
+(function() {
 var pathname = window.location.pathname;
 var chatChannels = "#"+pathname.split('/')[3];
 //var chatChannels = $("#chatframe").attr('chatroom');//"#cs1691x";
@@ -21,16 +22,16 @@ $("#chatiframe").on('load', function() {
 });
 
 if ($.cookie('chat_default') === "closed" || window.outerWidth < 750) {
-	window.onload = function() {
-          $("#chat-button").one("click", function() {
-            init();
-          });
-	}
+	$(document).ready(function() {
+		$("#chat-button").one("click", function() {
+		    init();
+		});
+	})
 } else {
 	if (document.getElementById('chatiframe')) {
-	  init();
+	    init();
 	} else {
-	  window.onload = init;
+	    $(document).ready(init);
 	}
 }
 
@@ -134,3 +135,5 @@ function showDelayed(delaySeconds, element, elementHide) {
                 });
   }, 1000*delaySeconds);
 }
+
+})();
