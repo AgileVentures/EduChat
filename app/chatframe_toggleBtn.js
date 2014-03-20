@@ -22,16 +22,16 @@ $("#chatiframe").on('load', function() {
 });
 
 if ($.cookie('chat_default') === "closed" || window.outerWidth < 750) {
-	$(document).ready(function() {
+	window.onload = function() {
 		$("#chat-button").one("click", function() {
 		    init();
 		});
-	})
+	};
 } else {
 	if (document.getElementById('chatiframe')) {
 	    init();
 	} else {
-	    $(document).ready(init);
+	    window.onload = init;
 	}
 }
 
