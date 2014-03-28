@@ -121,14 +121,14 @@ function showDelayed(delaySeconds, element, elementHide) {
     //document.getElementById(elementHide).style.display='none';
                 $("#chatframe").removeClass('minimized');
                 $("#chat-button").html("Hide Chat");
-                $.cookie('chat_default', 'open', { expires: 7 });
+                $.cookie('chat_default', 'open', { expires: 7, path: '/' });
                 $('#chat-button').on("click", function () {
                     $('#chatframe').toggleClass("minimized");
                     if ($('#chatframe').hasClass("minimized")) {
-                        $.cookie('chat_default', 'closed', { expires: 7 });
+                        $.cookie('chat_default', 'closed', { expires: 7, path: '/' });
                         $("#chat-button").html("Open Chat");
                     } else {
-                        $.cookie('chat_default', 'open', { expires: 7 });
+                        $.cookie('chat_default', 'open', { expires: 7, path: '/' });
                         $("#chat-button").html("Hide Chat");
                     }
                 });
