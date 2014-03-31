@@ -1,0 +1,55 @@
+div#chatframe {
+  height: 320px;
+  width: 814px;
+  padding: 5px;
+  margin: 0;
+  background: rgb(240,247,255);
+  position: fixed;
+  bottom: 0;
+  right: 5%;
+  text-align: center;
+  border-radius: 15px 15px 0 0;
+  border: solid 1px #333;
+  -webkit-transition: width 0.2s ease, height 0.2s ease;  
+  -moz-transition: width 0.2s ease, height 0.2s ease;  
+  -o-transition: width 0.2s ease, height 0.2s ease;  
+  transition: width 0.2s ease, height 0.2s ease;  
+  z-index: 100;
+}
+
+div#chatframe.minimized {
+  height: 30px;
+  width: 130px;
+}
+
+#chat-button {
+  display: block;
+  text-align: right;
+  color: #333;
+  font-weight:900;
+  padding: 5px;
+  margin: 0;
+  z-index: 100;
+}
+
+.minimized #chat-button {
+  text-align: center;
+}
+
+.minimized iframe#chatiframe {
+  height: 0px;
+  width: 0px;
+}
+
+iframe#chatiframe {
+  width: 800px;
+  height: 285px;
+  margin: 0;
+  padding: 0;
+  -webkit-transition: width 0.2s ease, height 0.2s ease;  
+  -moz-transition: width 0.2s ease, height 0.2s ease;  
+  -o-transition: width 0.2s ease, height 0.2s ease;  
+  transition: width 0.2s ease, height 0.2s ease;  
+  z-index: 100;
+}
+

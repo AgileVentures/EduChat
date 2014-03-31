@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>EduChat mid-fi mock-up</title>
+  <link rel="stylesheet" href="app.css" />
+</head>
+
+<body>
+  <div id="main_wrapper">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt rhoncus arcu vitae ullamcorper. Vivamus nisi orci, feugiat tempor scelerisque a, pharetra nec elit. Cras et porta erat. Etiam et viverra nibh, eget facilisis massa. Suspendisse euismod velit eget felis auctor cursus. Sed in est imperdiet, iaculis velit vel, iaculis sapien. Aliquam pellentesque risus magna, id ornare felis varius sed. Praesent tempor leo ac sollicitudin pulvinar. Cras lacinia lobortis libero, nec luctus eros mattis quis. Sed venenatis justo non mi feugiat venenatis</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie metus eu odio molestie, et eleifend nisi luctus. Mauris tempor id sem vitae euismod. Donec vitae elit suscipit, ornare orci a, feugiat enim. Maecenas eget suscipit lectus. Nunc condimentum elementum mauris et molestie. Nulla iaculis bibendum bibendum. Suspendisse euismod lacus ac elit lobortis bibendum. Integer posuere tristique ornare.</p>
+    <p>Donec venenatis ante dolor, a consequat lectus suscipit at. Etiam semper massa justo, eu aliquet leo vestibulum ut. Etiam consectetur pulvinar pulvinar. Duis ac lacus et purus pulvinar blandit. Quisque dapibus massa vitae fermentum condimentum. Morbi nisi magna, tempus sit amet fringilla tristique, semper vel orci. Aliquam eu dictum justo, ut interdum arcu. Etiam interdum vitae risus at tristique. Suspendisse adipiscing, lacus sit amet blandit rhoncus, massa neque feugiat odio, nec dictum felis nisi non mauris. Aenean quis lorem ut felis semper faucibus. Sed egestas ipsum eget eros venenatis, id fringilla mauris congue. Duis est est, imperdiet nec odio at, fermentum hendrerit elit. Aliquam consectetur erat ac quam aliquam iaculis. Nunc et pharetra magna.</p>
+    <p>Nam elementum ante quam, sed tempor metus porta at. Vivamus pulvinar velit ut varius dignissim. Phasellus et ipsum vulputate, hendrerit tortor eu, feugiat erat. Nunc auctor, metus et viverra blandit, leo ante tempor augue, sit amet tristique urna tortor a dui. Duis fringilla facilisis dui, vel dignissim nunc pulvinar sit amet. Duis eu ipsum lacinia, dictum turpis non, rutrum lacus. Aliquam commodo ac sapien a dapibus. Aliquam eleifend imperdiet turpis, ut ultrices ante facilisis quis. Sed pulvinar urna posuere luctus fermentum. Morbi magna lorem, luctus et dictum a, vulputate sed urna. Praesent feugiat leo aliquet tortor vulputate luctus. Suspendisse in nisl dolor. Aliquam tempus blandit egestas.</p>
+    <p>Quisque venenatis lorem eget lectus rhoncus, sed ornare felis varius. Proin ut tellus quis magna eleifend ullamcorper et nec orci. Quisque id urna massa. Nulla facilisi. Sed massa mi, dictum id dolor at, vehicula pharetra sapien. Nullam sed turpis a libero dapibus faucibus at vel lacus. Praesent scelerisque dictum enim, et faucibus sem faucibus at. Nulla erat eros, hendrerit ut lorem pellentesque, pulvinar lacinia mauris. Ut vitae tortor pellentesque, adipiscing velit quis, feugiat dolor. Fusce diam nulla, feugiat ut feugiat sed, tempus ut mauris. Donec iaculis sodales eros, vitae eleifend ipsum tempor non. Nulla eget diam mattis, venenatis mi nec, convallis enim.</p>
+  </div>
+  
+  <script type="text/javascript">
+    function toggleChat() {
+      var chatWindow = document.getElementById('chat');
+      chatWindow.classList.toggle("minimized");
+    }
+    function useGlobal() {
+      document.getElementById('chat_window').src = 'global_chat.html';
+    }
+    function useLocal() {
+      document.getElementById('chat_window').src = 'local_chat.html';
+    }
+  </script>
+  
+  <div id="chat" class="minimized">
+    <nav>
+      <ul>
+        <li><a href="javascript:useGlobal();">AV101</a></li>
+        <li><a href="javascript:useLocal()">Lecture 1</a></li>
+        <li><a href="javascript:toggleChat();" id="chat_button">Chat</a></li>
+      </ul>
+    </nav>
+    <iframe src="" frameborder="0" id="chat_window"></iframe>
+  </div>
+  
+  <script type="text/javascript">toggleChat(); useGlobal();</script>
+</body>
+</html>
