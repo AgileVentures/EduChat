@@ -4,7 +4,6 @@ To embed the improved chat server to an edX course, copy and paste the following
 
 ~~~html
 <link rel="stylesheet" href="https://rawgithub.com/AgileVentures/EduChat/master/app/assets/app.css">
-<script src="https://rawgithub.com/AgileVentures/EduChat/master/jquery.cookie.js"></script>
 <script type="text/javascript" src="https://rawgithub.com/AgileVentures/EduChat/master/app/chatframe_toggleBtn.js"></script>
 
 <div id="chatframe" class="minimized"></div>
