@@ -230,14 +230,14 @@ function showDelayed(delaySeconds, element, elementHide) {
     //document.getElementById(elementHide).style.display='none';
       $("#chatframe").removeClass('minimized');
       $("#chat-button").html("Hide Chat");
-      tmp.cookie('chat_default', 'open', { expires: 7 });
+      tmp.cookie('chat_default', 'open', { expires: 7, path: '/' });
       $('#chat-button').on("click", function () {
         $('#chatframe').toggleClass("minimized");
         if ($('#chatframe').hasClass("minimized")) {
-          tmp.cookie('chat_default', 'closed', { expires: 7 });
+          tmp.cookie('chat_default', 'closed', { expires: 7, path: '/' });
           $("#chat-button").html("Open Chat");
         } else {
-          tmp.cookie('chat_default', 'open', { expires: 7 });
+          tmp.cookie('chat_default', 'open', { expires: 7, path: '/' });
           $("#chat-button").html("Hide Chat");
         }
       });
