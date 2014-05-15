@@ -1,3 +1,4 @@
+
 /*\ chatframe_toggleBtn.js - edX embedded chat room load script
 |*|
 |*|  this version features an enable/disable toggle button persisted by cookie storage
@@ -10,83 +11,98 @@
   /* constants */
 
   var CHAT_SERVER_URL    = 'https://cs1692x.moocforums.org:9001/' ;
-  var CHATLOG_URL_PREFIX = 'https://cs1692x.moocforums.org/chatlog/edxframe/CS169.1x/3T2013/' ;
-  var CHATBTN_HTML   = '<a href="javascript:void(0);" id="chat-load-button">Join Chat</a>' ;
+  var STATIC_CHANNELS    = '' ;      // CSV list - must end in ',' comma if non-empty
+  var ALLOW_WORLD        = false ;   // useful for offsite development
+  var ANONYMOUS_USERNAME = "Anon_" ; // if ALLOW_WORLD
+  var DOM_WAIT_IVL       = 1000 ;
+  var IFRAME_WAIT_IVL    = 5000 ;
+
+  var CHAT_STATE_DISABLED              = 'disabled' ;
+  var CHAT_STATE_ENABLED               = 'enabled' ;
+  var CHAT_STATE_MINIMIZED             = 'minimized' ;
+  var CHAT_BTN_TEXTS                   = {} ;
+  CHATBTN_TEXT_DISABLED                = "Join Chat" ;
+  CHATBTN_TEXT_ENABLED                 = "Hide Chat" ;
+  CHATBTN_TEXT_MINIMIZED               = "Show Chat" ;
+  CHAT_BTN_TEXTS[CHAT_STATE_DISABLED]  = CHATBTN_TEXT_DISABLED ;
+  CHAT_BTN_TEXTS[CHAT_STATE_ENABLED]   = CHATBTN_TEXT_ENABLED ;
+  CHAT_BTN_TEXTS[CHAT_STATE_MINIMIZED] = CHATBTN_TEXT_MINIMIZED ;
+  var CHAT_CONTAINER_DIV_ID = 'chat-div' ;
+  var CHAT_IFRAME_ID        = 'chat-iframe' ;
+  var CHAT_LOADBTN_ID       = 'chat-load-button' ;
+  var CHAT_TOGGLEBTN_ID     = 'chat-toggle-button' ;
+  var DASHBOARD_BTN_CLASS   = 'user-link' ;
+  var CHAT_TAB_TITLE        = 'Chat' ;
+  var COOKIE_NAME           = 'chat_default' ;
+  var CHATBTN_HTML   =
+    '<a href="javascript:void(0);" id="' + CHAT_LOADBTN_ID + '">' + CHATBTN_TEXT_DISABLED + '</a>' ;
   var CHATFRAME_HTML =
   [
-    '<a href="javascript:void(0);" id="chat-button">Join Chat</a>',
-    '<iframe src="javascript:void(0)" id="chatiframe"></iframe>',
+    '<a href="javascript:void(0);" id="' + CHAT_TOGGLEBTN_ID + '"></a>',
+    '<iframe src="javascript:void(0)" id="' + CHAT_IFRAME_ID + '"></iframe>',
     '<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />',
     '<style>.no-close .ui-dialog-titlebar-close { display: none; }</style>'
   ].join('\n') ;
-  var MESSAGE_HTML   =
-  [
-    '<div class="chapter" id="reviewstarting" style="display:none;">',
-    '<h3 aria-label="" class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ui-accordion-icons" role="tab" aria-selected="false" tabindex="-1">',
-    '<b>The next <a href="https://courses.edx.org/courses/BerkeleyX/CS.169.2x/3T2013/courseware/5208a178b37d45fba5b592daa35f2c14/7a923a96615542cfbff4a5208abbc33d/" style="color:rgb(29, 157, 217);">Interactive Review session</a> is starting in less than 10 minutes. Please arrive in advance in order to complete the consent form.</b>',
-    '</h3>',
-    '</div><p><p>'
-  ].join('\n') ;
-  var CHAT_STATE_DISABLED = 'disabled' ;
-  var CHAT_STATE_ENABLED  = 'enabled' ;
-  var CHAT_BTN_TEXTS      = {} ;
-  CHAT_BTN_TEXTS[CHAT_STATE_DISABLED] = "Join Chat" ;
-  CHAT_BTN_TEXTS[CHAT_STATE_ENABLED]  = "Close Chat" ;
-  var ALLOW_WORLD = false ;          // useful for offsite development
-  var ANONYMOUS_USERNAME = "Anon_" ; // if ALLOW_WORLD
 
 
   /* functions */
 
   function init()
   {
+    document.getElementById(CHAT_CONTAINER_DIV_ID).style.display = 'block' ;
     if (IsChatEnabled) loadChat() ;
     else
     {
       setChatState(CHAT_STATE_DISABLED) ;
-      $('#chatframe').html(CHATBTN_HTML) ;
-      $('#chat-load-button').on("click" , loadChat) ;
+      $('#' + CHAT_CONTAINER_DIV_ID).html(CHATBTN_HTML) ;
+      $('#' + CHAT_LOADBTN_ID).on("click" , loadChat) ;
     }
   }
 
   function loadChat()
   {
-    $('#chatframe').html(CHATFRAME_HTML) ;
-    $('#chat-load-button').display = 'none' ;
-    $('#chat-button').html("Loading ...") ; updateChatUrl() ;
-    $('#chatiframe').on('load' , function()
+    var username = getUsername() ; if (!username && !ALLOW_WORLD) return ;
+
+    $('#' + CHAT_CONTAINER_DIV_ID).html(CHATFRAME_HTML) ;
+    $('#' + CHAT_CONTAINER_DIV_ID).display = 'none' ;
+    $('#' + CHAT_TOGGLEBTN_ID).html("Loading ...") ;
+    document.getElementById(CHAT_IFRAME_ID).src =
+      CHAT_SERVER_URL +
+      '?channels='    + encodeURIComponent(ChatChannels) +
+      '&nick='        + encodeURI(username)              ;
+
+    $('#' + CHAT_IFRAME_ID).on('load' , function()
     {
-      if (IsChatTab) document.getElementById('chatiframe').height = 600 ;
+      if (IsChatTab) document.getElementById(CHAT_IFRAME_ID).height = 600 ;
 
-      if ($('#reviewstarting').length == 0) $(".sequence-nav").after(MESSAGE_HTML) ;
-      updateReviewMessage() ;
-      window.setInterval(function() { updateReviewMessage(); } , 30000) ;
-
+      // TODO: this should really be an iframe callback
+      //       as there is no guarantee that the chat actually loaded
       window.setTimeout(function()
       {
         setChatState(CHAT_STATE_ENABLED) ;
-        $('#chatframe').toggleClass(CHAT_STATE_ENABLED) ;
-        $('#chat-button').on("click" , function ()
+        $('#' + CHAT_CONTAINER_DIV_ID).toggleClass(CHAT_STATE_ENABLED) ;
+        $('#' + CHAT_TOGGLEBTN_ID).on("click" , function ()
         {
-          $('#chatframe').toggleClass(CHAT_STATE_ENABLED) ;
-          var isEnabled = ($('#chatframe').hasClass(CHAT_STATE_ENABLED)) ;
-          setChatState((isEnabled)? CHAT_STATE_ENABLED : CHAT_STATE_DISABLED) ;
+          $('#' + CHAT_CONTAINER_DIV_ID).toggleClass(CHAT_STATE_ENABLED) ;
+          var isEnabled = ($('#' + CHAT_CONTAINER_DIV_ID).hasClass(CHAT_STATE_ENABLED)) ;
+          setChatState((isEnabled)? CHAT_STATE_ENABLED : CHAT_STATE_MINIMIZED) ;
         }) ;
-      } , 5000) ;
+      } , IFRAME_WAIT_IVL) ;
     }) ;
   }
 
   function setChatState(chatState)
   {
-    $("#chat-button").html(CHAT_BTN_TEXTS[chatState]) ;
+    $("#" + CHAT_TOGGLEBTN_ID).html(CHAT_BTN_TEXTS[chatState]) ;
     setStoredState(chatState) ;
   }
 
-  function getStoredState() { return CookieObj.cookie('chat_default') ; }
+  function getStoredState() { return CookieObj.cookie(COOKIE_NAME) ; }
 
   function setStoredState(chatState)
   {
-    CookieObj.cookie('chat_default' , chatState , { expires: 7 , path: '/' }) ;
+    var nextState = (chatState == CHAT_STATE_ENABLED)? chatState : CHAT_STATE_DISABLED ;
+    CookieObj.cookie(COOKIE_NAME , nextState , { expires: 7 , path: '/' }) ;
   }
 
   function getCookie($) // TODO: this could be much cleaner if using LocalStorage instead
@@ -192,69 +208,31 @@
     return cookieObj ;
   }
 
-  function getContentInContainer(matchClass)
-  {
-    var elems = document.getElementsByTagName('*') , i ;
-    for (i in elems)
-      if (~(' ' + elems[i].className + ' ').indexOf(' ' + matchClass + ' '))
-        return elems[i].textContent ;
-  }
-
   function getUsername()
   {
     var anonymousUsername = (ANONYMOUS_USERNAME + (new Date()).getTime()) ;
-    var userLink          = getContentInContainer("user-link") ;
-    if (!userLink) return (ALLOW_WORLD)? anonymousUsername : '' ;
+    var dashboardA        = document.getElementsByClassName(DASHBOARD_BTN_CLASS)[0] ;
+    if (!dashboardA) return (ALLOW_WORLD)? anonymousUsername : '' ;
 
-    var username = userLink.replace("Dashboard for:" , "").replace(/^\s+|\s+$/g , '') ;
-    if (!isNaN(n[0])) username = "_" + username ;
+    var username = dashboardA.textContent.replace("Dashboard for:" , "").replace(/^\s+|\s+$/g , '') ;
+    if (!isNaN(username[0])) username = "_" + username ;
 
     return username ;
-  }
-
-  function updateChatUrl()
-  {
-    var username = getUsername() ;
-    if (ALLOW_WORLD || username)
-      document.getElementById('chatiframe').src =
-        CHAT_SERVER_URL +
-        '?channels='    + encodeURIComponent(ChatChannels) +
-        '&nick='        + encodeURI(username)              ;
-  }
-
-  function updateReviewMessage()
-  {
-    $.ajax(
-    {
-      url:           CHATLOG_URL_PREFIX + 'getdate/' ,
-      dataType:      'jsonp'                         ,
-      type:          'GET'                           ,
-      async:         false                           ,
-      contentType:   "application/json"              ,
-      jsonpCallback: 'jsonCallback'                  ,
-      success:       function(json)
-      {
-        if (json.year   == 2013 &&
-            json.month  == 12   &&
-            json.day    >= 12   && json.day  <= 15  &&
-            (json.day   >  12   || json.hour >= 12) &&
-            (json.day   <  15   || json.hour <  12) &&
-            json.minute >= 50)
-             $("#reviewstarting").show() ;
-        else $("#reviewstarting").hide() ;
-      }
-    }) ;
   }
 
 
 /* main */
 
-  var CookieObj      = getCookie(jQuery) ; // TODO: use LocalStorage
+  var CookieObj     = getCookie(jQuery) ; // TODO: use LocalStorage
+  var ChatChannels  = STATIC_CHANNELS + "#" + window.location.pathname.split('/')[3] ;
+  var IsChatTab     = (~document.title.indexOf(CHAT_TAB_TITLE)) ;
+  var IsChatEnabled = (getStoredState() === CHAT_STATE_ENABLED) ;
 
-  var ChatChannels   = "#" + window.location.pathname.split('/')[3] ;
-  var IsChatTab      = (~document.title.indexOf("Chat")) ;
-  var IsChatEnabled  = getStoredState() === CHAT_STATE_ENABLED ;
+  DomWaitIvl = window.setInterval(function()
+  {
+    if (!document.getElementById(CHAT_CONTAINER_DIV_ID)) return ;
 
-  window.onload = init ;
+    window.clearInterval(DomWaitIvl) ; init() ;
+  } , DOM_WAIT_IVL) ;
 
 })();
