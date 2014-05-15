@@ -1,0 +1,6 @@
+
+this directory contains several implementations of the edX chat load script
+
+'chatframe.js' is the canonical script that is referenced in the edX xBlock
+it is not a distingt script but should be a copy of one of the others
+for simple switching of implementations without updating the edX site

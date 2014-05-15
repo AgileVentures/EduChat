@@ -1,7 +1,7 @@
 
 changelog
 
-  2014-05-12 (MrJ):
+  2ab96158cf 2014-05-12 (MrJ):
     renamed CSS class from 'minimized' to 'enabled' (opposite semantics)
     removed faux clicks and non-functional pre-ready-state DOM checking
     moved premature iframe loading into DOM-ready callback (this was the main bug)
@@ -10,3 +10,9 @@ changelog
     added "opt-in" button to trigger the actual chat frame loading and login
     changed README.md to instruct loading './app/chatframe.js' to avoid updating xBlock
     much refactoring , reformatting , and a few minor CSS tweaks
+
+  6eccf0f2ac 2014-05-15 (MrJ):
+    replaced onload callback to init() with DOM checking (fixes the tab swtching focus bug)
+    removed obsolete "review alert" div , function , and interval
+    simplified username scraping
+    minor bug fix , refactoring , and css tweaks
