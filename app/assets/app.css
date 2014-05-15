@@ -1,55 +1,64 @@
-div#chatframe {
-  height: 320px;
-  width: 814px;
+
+#chat-div
+{
+  display: none;
+  height: 30px;
+  width: 130px;
   padding: 5px;
-  margin: 0;
+  margin: 0px;
   background: rgb(240,247,255);
   position: fixed;
-  bottom: 0;
-  right: 5%;
+  bottom: 0px;
+  right: 0px;
   text-align: center;
-  border-radius: 15px 15px 0 0;
+  border-radius: 15px 15px 0px 0px;
   border: solid 1px #333;
-  -webkit-transition: width 0.2s ease, height 0.2s ease;  
-  -moz-transition: width 0.2s ease, height 0.2s ease;  
-  -o-transition: width 0.2s ease, height 0.2s ease;  
-  transition: width 0.2s ease, height 0.2s ease;  
+  -webkit-transition: width 0.2s ease, height 0.2s ease;
+  -moz-transition: width 0.2s ease, height 0.2s ease;
+  -o-transition: width 0.2s ease, height 0.2s ease;
+  transition: width 0.2s ease, height 0.2s ease;
   z-index: 100;
 }
 
-div#chatframe.minimized {
-  height: 30px;
-  width: 130px;
+#chat-div.enabled
+{
+  width: 614px;
+  height: 320px;
 }
 
-#chat-button {
+#chat-load-button , #chat-toggle-button
+{
   display: block;
-  text-align: right;
+  text-align: center;
   color: #333;
   font-weight:900;
   padding: 5px;
-  margin: 0;
+  margin: 0px;
   z-index: 100;
+  text-decoration: none;
 }
 
-.minimized #chat-button {
-  text-align: center;
+.enabled #chat-toggle-button
+{
+  text-align: right;
 }
 
-.minimized iframe#chatiframe {
-  height: 0px;
-  width: 0px;
-}
-
-iframe#chatiframe {
-  width: 800px;
+.enabled #chat-iframe
+{
+  width: 600px;
   height: 285px;
-  margin: 0;
-  padding: 0;
-  -webkit-transition: width 0.2s ease, height 0.2s ease;  
-  -moz-transition: width 0.2s ease, height 0.2s ease;  
-  -o-transition: width 0.2s ease, height 0.2s ease;  
-  transition: width 0.2s ease, height 0.2s ease;  
-  z-index: 100;
 }
 
+#chat-iframe
+{
+  position: static;
+  width: 0px;
+  height: 0px;
+  margin: 0px;
+  padding: 0px;
+  -webkit-transition: width 0.2s ease, height 0.2s ease;
+  -moz-transition: width 0.2s ease, height 0.2s ease;
+  -o-transition: width 0.2s ease, height 0.2s ease;
+  transition: width 0.2s ease, height 0.2s ease;
+  z-index: 100;
+}

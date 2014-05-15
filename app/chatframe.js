@@ -10,12 +10,12 @@
 {
   /* constants */
 
+  var CHAT_SERVER_URL    = 'https://cs1692x.moocforums.org:9001/' ;
   var STATIC_CHANNELS    = '' ;      // CSV list - must end in ',' comma if non-empty
   var ALLOW_WORLD        = false ;   // useful for offsite development
   var ANONYMOUS_USERNAME = "Anon_" ; // if ALLOW_WORLD
-  var CHAT_SERVER_URL    = 'https://cs1692x.moocforums.org:9001/' ;
   var DOM_WAIT_IVL       = 1000 ;
-  var IFRAME_WAIT_IVL    = 5000
+  var IFRAME_WAIT_IVL    = 5000 ;
 
   var CHAT_STATE_DISABLED              = 'disabled' ;
   var CHAT_STATE_ENABLED               = 'enabled' ;
